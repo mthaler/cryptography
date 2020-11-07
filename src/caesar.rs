@@ -44,20 +44,33 @@ fn decrypt(key: HashMap<char, char>, msg: String) -> String {
 #[cfg(test)]
 mod tests {
 
-    const msg: &str =  "It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, \n
+    const MSG: &str =  "It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, \n
 it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair, we had everything before us, we had nothing before us, \n
 we were all going direct to Heaven, we were all going direct the other way--in short, the period was so far like the present period, that some of its noisiest authorities insisted \n
 on its being received, for good or for evil, in the superlative degree of comparison only.";
 
-    const cypher: &str = "Lw zdv wkh ehvw ri wlphv, lw zdv wkh zruvw ri wlphv, lw zdv wkh djh ri zlvgrp, lw zdv wkh djh ri irrolvkqhvv, lw zdv wkh hsrfk ri eholhi, lw zdv wkh hsrfk ri lqfuhgxolwB, \n
+    const CYPHER: &str = "Lw zdv wkh ehvw ri wlphv, lw zdv wkh zruvw ri wlphv, lw zdv wkh djh ri zlvgrp, lw zdv wkh djh ri irrolvkqhvv, lw zdv wkh hsrfk ri eholhi, lw zdv wkh hsrfk ri lqfuhgxolwB, \n
 lw zdv wkh vhdvrq ri Oljkw, lw zdv wkh vhdvrq ri Gdunqhvv, lw zdv wkh vsulqj ri krsh, lw zdv wkh zlqwhu ri ghvsdlu, zh kdg hyhuBwklqj ehiruh xv, zh kdg qrwklqj ehiruh xv, \n
 zh zhuh doo jrlqj gluhfw wr Khdyhq, zh zhuh doo jrlqj gluhfw wkh rwkhu zdB--lq vkruw, wkh shulrg zdv vr idu olnh wkh suhvhqw shulrg, wkdw vrph ri lwv qrlvlhvw dxwkrulwlhv lqvlvwhg \n
 rq lwv ehlqj uhfhlyhg, iru jrrg ru iru hylo, lq wkh vxshuodwlyh ghjuhh ri frpsdulvrq rqoB.";
 
     #[test]
-    fn generate_key() {
+    fn test_generate_key() {
         let key = super::generate_key(3);
-        println!("{:?}", key);
         assert_eq!(key.get(&'A'), Some(&'D'))
+    }
+
+    #[test]
+    fn test_encrypt() {
+        let key = super::generate_key(3);
+        let result = super::encrypt(key, String::from(MSG));
+        assert_eq!(result, CYPHER);
+    }
+
+    #[test]
+    fn test_decrypt() {
+        let key = super::generate_key(3);
+        let result = super::decrypt(key, String::from(CYPHER));
+        assert_eq!(result, MSG);
     }
 }
