@@ -37,7 +37,7 @@ pub fn decrypt(msg: Vec<u8>, key: &Vec<u8>) -> Result<String, &'static str> {
 }
 
 
-fn generateKey(n: i32) -> Vec<u8> {
+fn generate_key(n: i32) -> Vec<u8> {
     let mut key: Vec<u8> = Vec::new();
     let mut i = 0;
     let mut rng = rand::thread_rng();
@@ -53,14 +53,14 @@ fn generateKey(n: i32) -> Vec<u8> {
 mod tests {
     
     #[test]
-    fn encryptDecrypt() {
-        use super::{encrypt, decrypt, generateKey};
+    fn encrypt_decrypt() {
+        use super::{encrypt, decrypt, generate_key};
         
         let msg =  "It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, \n
 it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair, we had everything before us, we had nothing before us, \n
 we were all going direct to Heaven, we were all going direct the other way--in short, the period was so far like the present period, that some of its noisiest authorities insisted \n
 on its being received, for good or for evil, in the superlative degree of comparison only.";
-        let key = generateKey(1024);
+        let key = generate_key(1024);
         let enc = encrypt(String::from(msg), &key).expect("Could not encrypt msg!");
         let dec = decrypt(enc, &key).expect("Could not decrypt msg!");
         assert_eq!(msg, dec);

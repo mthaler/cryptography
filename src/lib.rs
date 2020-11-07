@@ -1,4 +1,5 @@
 mod onetimepad;
+mod caesar;
 
 #[cfg(test)]
 mod tests {
