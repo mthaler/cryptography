@@ -1,5 +1,6 @@
 mod onetimepad;
 mod caesar;
+mod frequencies;
 mod substitution;
 
 #[cfg(test)]
