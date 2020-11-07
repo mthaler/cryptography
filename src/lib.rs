@@ -1,3 +1,5 @@
+mod onetimepad;
+
 #[cfg(test)]
 mod tests {
     #[test]
